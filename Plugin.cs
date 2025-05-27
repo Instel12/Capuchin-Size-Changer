@@ -1,5 +1,6 @@
-﻿using BepInEx;
+using BepInEx;
 using BepInEx.Unity.IL2CPP;
+using Locomotion;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -40,7 +41,7 @@ namespace CapuchinTemplate
             InputDevice leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
             if (ismodded)
             {
-                GameObject.Find("CapuchinPlayer").transform.localScale = new Vector3(size, size, size);
+                Player.Instance.transform.localScale = new Vector3(size, size, size);
                 if (rightHand.TryGetFeatureValue(CommonUsages.triggerButton, out bool righttrigger) && righttrigger)
                 {
                     size += 0.1f;
@@ -52,7 +53,7 @@ namespace CapuchinTemplate
                 if (leftHand.TryGetFeatureValue(CommonUsages.primaryButton, out bool leftprimary) && leftprimary)
                 {
                     size = 0f;
-                    GameObject.Find("CapuchinPlayer").transform.localScale = new Vector3(size, size, size);
+                    Player.Instance.transform.localScale = new Vector3(size, size, size);
                 }
             }
             else
