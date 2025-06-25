@@ -4,22 +4,16 @@ using Locomotion;
 using UnityEngine;
 using UnityEngine.XR;
 
+[assembly: MelonInfo(typeof(Plugin), "Size Changer", "1.0.0", "Instel")]
+
 namespace CapuchinTemplate
 {
-    [BepInPlugin("instel.sizechanger", "Size Changer", "1.0.0")]
-    public class Plugin : BasePlugin
-    {
-        public override void Load()
-        {
-            AddComponent<PluginBehaviour>();
-        }
-    }
-
-    public class PluginBehaviour : MonoBehaviour
+    public class Plugin : MelonMod
     {
         float size = 1f;
         bool ismodded = false;
-        void Start()
+        
+        public override void OnMelonInitialize()
         {
             Caputilla.CaputillaManager.Instance.OnModdedJoin += OnJoinedModded;
             Caputilla.CaputillaManager.Instance.OnModdedLeave += OnLeaveModded;
@@ -35,7 +29,7 @@ namespace CapuchinTemplate
             ismodded = false;
         }
 
-        void Update()
+        public override void OnUpdate()
         {
             InputDevice rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
             InputDevice leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
